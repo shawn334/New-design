@@ -11,7 +11,7 @@ export default function Hero() {
   const { t } = useLanguage();
 
   return (
-    <section ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-mesh pt-20">
+    <section ref={containerRef} className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-mesh pt-32 pb-20">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 z-0">
         <motion.div 
@@ -34,8 +34,8 @@ export default function Hero() {
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="max-w-7xl mx-auto px-6 relative z-10 w-full flex-1 flex flex-col justify-center">
+        <div className="grid lg:grid-cols-2 gap-20 lg:gap-24 items-center">
           <motion.div
             style={{ opacity }}
             initial={{ opacity: 0, x: -50 }}
@@ -43,30 +43,30 @@ export default function Hero() {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="text-left"
           >
-            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-brand-accent text-[10px] font-black uppercase tracking-[0.3em] mb-12 backdrop-blur-md">
+            <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 text-brand-accent text-[10px] font-black uppercase tracking-[0.3em] mb-12 backdrop-blur-md shadow-lg">
               <span className="w-2 h-2 rounded-full bg-brand-accent animate-pulse" />
               {t.hero.badge}
             </div>
 
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-8 leading-[0.9] tracking-tighter uppercase">
+            <h1 className="text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] font-black mb-10 leading-[0.9] tracking-tighter uppercase">
               <span className="block text-white">{t.hero.title1}</span>
               <span className="block text-gradient-vibrant">{t.hero.title2}</span>
             </h1>
 
-            <p className="text-lg md:text-xl text-slate-400 mb-12 max-w-xl font-medium leading-relaxed">
+            <p className="text-lg md:text-xl xl:text-2xl text-slate-400 mb-14 max-w-xl font-medium leading-relaxed">
               {t.hero.subtitle}
             </p>
 
             <div className="flex flex-col sm:flex-row items-start gap-6">
-              <button className="btn-primary group">
+              <button className="btn-primary group text-lg px-10 py-5">
                 <span className="relative z-10 flex items-center gap-3">
                   {t.hero.cta}
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-brand-secondary to-brand-primary opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </button>
 
-              <button className="btn-secondary group">
+              <button className="btn-secondary group text-lg px-10 py-5">
                 {t.hero.secondaryCta}
               </button>
             </div>
@@ -78,19 +78,19 @@ export default function Hero() {
             transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="relative"
           >
-            <div className="absolute -top-6 -right-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/20 border border-brand-primary/30 text-brand-accent text-xs font-black uppercase tracking-widest z-20 backdrop-blur-md">
+            <div className="absolute -top-6 -right-6 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-primary/20 border border-brand-primary/30 text-brand-accent text-xs font-black uppercase tracking-widest z-20 backdrop-blur-md shadow-xl">
               30+ languages
             </div>
-            <div className="glass-card p-8 rounded-[40px] border border-white/10 bg-white/5 backdrop-blur-xl relative overflow-hidden">
+            <div className="glass-card p-10 lg:p-12 rounded-[48px] border border-white/10 bg-white/5 backdrop-blur-xl relative overflow-hidden shadow-2xl shadow-black/50">
               <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/10 to-transparent" />
               
               <div className="relative z-10">
-                <div className="flex items-center gap-3 mb-8 pb-6 border-b border-white/10">
-                  <div className="w-2 h-2 rounded-full bg-brand-accent animate-pulse" />
-                  <span className="text-xs font-black uppercase tracking-widest text-slate-400">Content sync status</span>
+                <div className="flex items-center gap-3 mb-10 pb-8 border-b border-white/10">
+                  <div className="w-2.5 h-2.5 rounded-full bg-brand-accent animate-pulse" />
+                  <span className="text-sm font-black uppercase tracking-widest text-slate-400">Content sync status</span>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-5">
                   {[
                     { lang: '🇨🇳 Chinese (source)', status: '✓ Live', color: 'text-emerald-400', bg: 'bg-emerald-400/10' },
                     { lang: '🇩🇪 German', status: '✓ Live', color: 'text-emerald-400', bg: 'bg-emerald-400/10' },
@@ -98,18 +98,18 @@ export default function Hero() {
                     { lang: '🇧🇷 Portuguese', status: '⚠ 7 updates behind', color: 'text-amber-400', bg: 'bg-amber-400/10' },
                     { lang: '🇸🇦 Arabic', status: '✗ Not started', color: 'text-rose-400', bg: 'bg-rose-400/10' },
                   ].map((item, i) => (
-                    <div key={i} className="flex items-center justify-between p-3 rounded-xl hover:bg-white/5 transition-colors">
-                      <span className="font-medium text-slate-300">{item.lang}</span>
-                      <span className={`text-xs font-bold px-3 py-1 rounded-full ${item.bg} ${item.color}`}>
+                    <div key={i} className="flex items-center justify-between p-4 rounded-2xl hover:bg-white/5 transition-colors">
+                      <span className="font-medium text-slate-300 text-lg">{item.lang}</span>
+                      <span className={`text-xs font-bold px-4 py-1.5 rounded-full ${item.bg} ${item.color}`}>
                         {item.status}
                       </span>
                     </div>
                   ))}
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between text-sm font-bold text-brand-accent group cursor-pointer">
+                <div className="mt-10 pt-8 border-t border-white/10 flex items-center justify-between text-base font-bold text-brand-accent group cursor-pointer">
                   <span>Translia fixes this</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
             </div>
@@ -117,7 +117,7 @@ export default function Hero() {
         </div>
 
         {/* Floating Stats/Badges */}
-        <div className="mt-32 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/5 pt-16">
+        <div className="mt-24 lg:mt-32 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/5 pt-12 lg:pt-16">
           {t.stats.map((stat, i) => (
             <motion.div
               key={stat.label}
@@ -126,8 +126,8 @@ export default function Hero() {
               transition={{ delay: 0.5 + i * 0.1 }}
               className="text-center"
             >
-              <div className="text-3xl md:text-5xl font-black text-white mb-2">{stat.value}</div>
-              <div className="text-[10px] font-black uppercase tracking-widest text-slate-500">{stat.label}</div>
+              <div className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-3">{stat.value}</div>
+              <div className="text-xs font-black uppercase tracking-widest text-slate-500">{stat.label}</div>
             </motion.div>
           ))}
         </div>
@@ -137,9 +137,9 @@ export default function Hero() {
       <motion.div 
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 hidden md:flex"
       >
-        <div className="w-[1px] h-12 bg-gradient-to-b from-brand-primary to-transparent" />
+        <div className="w-[1px] h-16 bg-gradient-to-b from-brand-primary to-transparent" />
         <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">Scroll</span>
       </motion.div>
     </section>
