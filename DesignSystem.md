@@ -9,9 +9,9 @@ This document summarizes the design system used for the Translia website redesig
 ## 2. Color Palette
 - **Deep Background**: `#020617` (brand-deep)
 - **Dark Surface**: `#0F172A` (brand-dark)
-- **Primary (Action)**: `#6366F1` (Indigo)
-- **Secondary (Accent)**: `#EC4899` (Magenta/Pink)
-- **Accent (Highlight)**: `#06B6D4` (Cyan)
+- **Primary (Action)**: `#076DB0` (Translia Blue)
+- **Secondary (Accent)**: `#0284C7` (Sky Blue)
+- **Accent (Highlight)**: `#38BDF8` (Light Blue)
 - **Text**: `Slate-300` (Body), `White` (Headings)
 
 ## 3. Typography

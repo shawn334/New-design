@@ -1,8 +1,10 @@
 import { motion } from 'motion/react';
-import { SITE_CONTENT } from '../constants';
 import { ArrowRight } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Insights() {
+  const { t } = useLanguage();
+
   return (
     <section id="insights" className="py-40 relative overflow-hidden bg-brand-deep">
       <div className="max-w-7xl mx-auto px-6">
@@ -14,11 +16,11 @@ export default function Insights() {
               viewport={{ once: true }}
               className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-secondary/10 border border-brand-secondary/20 text-brand-secondary text-[10px] font-black uppercase tracking-widest mb-8"
             >
-              Latest Thinking
+              {t.proof.badge}
             </motion.div>
-            <h2 className="text-6xl md:text-8xl font-black leading-[0.85] tracking-tighter">
-              GLOBAL<br />
-              <span className="text-gradient-vibrant">INSIGHTS</span>
+            <h2 className="text-6xl md:text-8xl font-black leading-[0.85] tracking-tighter uppercase">
+              <span className="block">{t.proof.title.split('.')[0]}.</span>
+              <span className="block text-gradient-vibrant">{t.proof.title.split('.')[1]}.</span>
             </h2>
           </div>
           <button className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-white group hover:gap-5 transition-all">
@@ -27,7 +29,7 @@ export default function Insights() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-12">
-          {SITE_CONTENT.insights.map((insight, index) => (
+          {t.proof.items.map((insight, index) => (
             <motion.div
               key={insight.id}
               initial={{ opacity: 0, y: 30 }}
@@ -55,9 +57,12 @@ export default function Insights() {
                 <div className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-4">
                   {insight.date}
                 </div>
-                <h3 className="text-2xl font-black text-white group-hover:text-brand-secondary transition-colors leading-tight mb-6">
+                <h3 className="text-2xl font-black text-white group-hover:text-brand-secondary transition-colors leading-tight mb-4">
                   {insight.title}
                 </h3>
+                <p className="text-sm text-slate-400 font-medium leading-relaxed mb-6">
+                  {insight.description}
+                </p>
                 <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-brand-secondary opacity-0 group-hover:opacity-100 transition-all -translate-x-4 group-hover:translate-x-0">
                   Read Article <ArrowRight className="w-4 h-4" />
                 </div>

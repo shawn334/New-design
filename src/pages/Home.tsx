@@ -6,14 +6,36 @@ import Industries from '../components/Industries';
 import Insights from '../components/Insights';
 import { motion } from 'motion/react';
 import { Globe2, Users, Zap, Award } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Home() {
+  const { t } = useLanguage();
+
   return (
-    <div className="min-h-screen bg-brand-deep selection:bg-brand-primary selection:text-white overflow-x-hidden">
+    <div className="min-h-screen bg-brand-deep selection:bg-brand-primary selection:text-[#ffffff] overflow-x-hidden">
       <Navbar />
       
       <main>
         <Hero />
+
+        {/* Logos Section */}
+        <section className="py-20 border-b border-white/5 bg-brand-dark/20">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="flex flex-col md:flex-row items-center gap-12">
+              <div className="md:w-1/3 text-sm font-bold text-slate-500 uppercase tracking-widest leading-relaxed">
+                We have supported multilingual content for these brands and projects
+              </div>
+              <div className="md:w-2/3 flex flex-wrap gap-x-8 gap-y-6 opacity-50">
+                {['Samsung', 'Yamaha', 'Bosch', 'OPPO', 'Honor', 'Kenzo', 'LEMAIRE', 'FEAR OF GOD', 'Huawei', 'IBM', 'LG', 'LAVA MUSIC', 'OCLEAN', 'HIMOISA', 'AirAsia'].map((brand) => (
+                  <span key={brand} className="text-lg font-display font-black tracking-tighter text-white hover:text-brand-primary transition-colors cursor-default">
+                    {brand}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
         <Friction />
         <Industries />
         
@@ -28,31 +50,38 @@ export default function Home() {
                 viewport={{ once: true }}
               >
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-[10px] font-black uppercase tracking-widest mb-8">
-                  Global Footprint
+                  {t.approach.badge}
                 </div>
-                <h2 className="text-6xl md:text-8xl font-black mb-12 leading-[0.85] tracking-tighter">
-                  GLOBAL SCALE.<br />
-                  <span className="text-gradient-vibrant">LOCAL NUANCE.</span>
+                <h2 className="text-6xl md:text-8xl font-black mb-12 leading-[0.85] tracking-tighter uppercase">
+                  {t.approach.title}
                 </h2>
                 <p className="text-xl text-slate-400 font-medium leading-relaxed mb-12 max-w-lg">
-                  We operate at the intersection of massive scale and surgical precision. Our global network is powered by AI but guided by human intuition.
+                  {t.approach.description}
                 </p>
                 
-                <div className="grid grid-cols-2 gap-12">
-                  {[
-                    { label: 'Global Offices', value: '42', icon: Globe2 },
-                    { label: 'Active Experts', value: '12K', icon: Users },
-                    { label: 'Daily Words', value: '5M+', icon: Zap },
-                    { label: 'Awards Won', value: '150+', icon: Award },
-                  ].map((stat) => (
-                    <div key={stat.label} className="flex flex-col gap-2 group">
-                      <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center mb-4 group-hover:bg-brand-primary transition-colors">
-                        <stat.icon className="text-brand-primary w-6 h-6 group-hover:text-white transition-colors" />
+                <div className="mt-12">
+                  <div className="flex flex-wrap items-center gap-4 mb-16">
+                    {t.approach.flow.map((step, index) => (
+                      <div key={step.title} className="flex items-center gap-4">
+                        <div className="flex flex-col">
+                          <span className="text-white font-black text-lg">{step.title}</span>
+                          <span className="text-slate-500 text-xs uppercase tracking-widest font-bold">{step.desc}</span>
+                        </div>
+                        {index < t.approach.flow.length - 1 && (
+                          <div className="text-brand-primary font-black">→</div>
+                        )}
                       </div>
-                      <div className="text-5xl font-black text-white tracking-tighter">{stat.value}</div>
-                      <div className="text-[10px] font-black uppercase tracking-widest text-slate-500">{stat.label}</div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-8 pt-12 border-t border-white/10">
+                    {t.approach.metrics.map((metric) => (
+                      <div key={metric.label} className="flex flex-col gap-2">
+                        <div className="text-4xl font-black text-white tracking-tighter">{metric.value}</div>
+                        <div className="text-[10px] font-black uppercase tracking-widest text-slate-500">{metric.label}</div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </motion.div>
 
@@ -115,21 +144,66 @@ export default function Home() {
         <Services />
         <Insights />
         
+        {/* FAQ Section */}
+        <section className="py-40 relative bg-brand-dark/20 border-t border-white/5">
+          <div className="max-w-4xl mx-auto px-6">
+            <div className="text-center mb-24">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-[10px] font-black uppercase tracking-widest mb-8"
+              >
+                FAQ
+              </motion.div>
+              <h2 className="text-5xl md:text-7xl font-black leading-[0.85] tracking-tighter uppercase">
+                <span className="block">{t.faq.title.split(' ').slice(0, 3).join(' ')}</span>
+                <span className="block text-gradient-vibrant">{t.faq.title.split(' ').slice(3).join(' ')}</span>
+              </h2>
+            </div>
+
+            <div className="space-y-4">
+              {t.faq.items.map((item, index) => (
+                <motion.details
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="group glass-card rounded-3xl overflow-hidden [&_summary::-webkit-details-marker]:hidden"
+                >
+                  <summary className="flex items-center justify-between p-8 cursor-pointer list-none">
+                    <h3 className="text-xl font-bold text-white group-hover:text-brand-primary transition-colors pr-8">
+                      {item.q}
+                    </h3>
+                    <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center flex-shrink-0 group-open:rotate-45 transition-transform duration-300">
+                      <span className="text-xl leading-none text-brand-primary">+</span>
+                    </div>
+                  </summary>
+                  <div className="px-8 pb-8 pt-0 text-slate-400 font-medium leading-relaxed">
+                    {item.a}
+                  </div>
+                </motion.details>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section className="py-40 relative">
           <div className="max-w-5xl mx-auto px-6">
             <div className="glass-card p-20 rounded-[64px] text-center relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/20 via-transparent to-brand-secondary/20" />
               <div className="relative z-10">
-                <h2 className="text-5xl md:text-7xl font-black mb-8 leading-none tracking-tighter">
-                  READY TO GO<br />
-                  <span className="text-gradient-vibrant">BEYOND BORDERS?</span>
+                <h2 className="text-5xl md:text-7xl font-black mb-8 leading-none tracking-tighter uppercase">
+                  {t.cta.title1}<br />
+                  <span className="text-gradient-vibrant">{t.cta.title2}</span>
                 </h2>
                 <p className="text-xl text-slate-400 font-medium mb-12 max-w-xl mx-auto">
-                  Join the world's most ambitious brands in redefining the global experience.
+                  {t.cta.subtitle}
                 </p>
                 <button className="btn-primary">
-                  Get Started Now
+                  {t.cta.button}
                 </button>
               </div>
             </div>
@@ -143,7 +217,7 @@ export default function Home() {
                 <div className="flex items-center gap-3 mb-8">
                   <div className="relative">
                     <div className="w-10 h-10 bg-brand-primary rounded-xl flex items-center justify-center relative z-10">
-                      <Globe2 className="text-white w-6 h-6" />
+                      <Globe2 className="text-[#ffffff] w-6 h-6" />
                     </div>
                   </div>
                   <div className="flex flex-col -gap-1">
@@ -156,38 +230,36 @@ export default function Home() {
                   </div>
                 </div>
                 <p className="text-xl text-slate-500 font-medium max-w-sm leading-relaxed">
-                  Engineering cross-cultural resonance for the world's most ambitious brands.
+                  {t.footer.tagline}
                 </p>
               </div>
               
               <div>
-                <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-white mb-8">Solutions</h4>
+                <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-white mb-8">Services</h4>
                 <ul className="space-y-4 text-sm font-bold text-slate-500">
-                  <li><a href="#" className="hover:text-brand-primary transition-colors">Digital Experience</a></li>
-                  <li><a href="#" className="hover:text-brand-primary transition-colors">AI Orchestration</a></li>
-                  <li><a href="#" className="hover:text-brand-primary transition-colors">Global Strategy</a></li>
-                  <li><a href="#" className="hover:text-brand-primary transition-colors">Content Lifecycle</a></li>
+                  {t.services_summary.items.map((service, i) => (
+                    <li key={i}><a href="/services" className="hover:text-brand-primary transition-colors">{service.title}</a></li>
+                  ))}
                 </ul>
               </div>
 
               <div>
                 <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-white mb-8">Company</h4>
                 <ul className="space-y-4 text-sm font-bold text-slate-500">
-                  <li><a href="#" className="hover:text-brand-primary transition-colors">About Us</a></li>
-                  <li><a href="#" className="hover:text-brand-primary transition-colors">Careers</a></li>
-                  <li><a href="#" className="hover:text-brand-primary transition-colors">Press</a></li>
-                  <li><a href="#" className="hover:text-brand-primary transition-colors">Contact</a></li>
+                  <li><a href="/how" className="hover:text-brand-primary transition-colors">How We Work</a></li>
+                  <li><a href="/industries" className="hover:text-brand-primary transition-colors">Industries</a></li>
+                  <li><a href="/about" className="hover:text-brand-primary transition-colors">About Us</a></li>
+                  <li><a href="/contact" className="hover:text-brand-primary transition-colors">Contact</a></li>
                 </ul>
               </div>
             </div>
             
             <div className="flex flex-col md:flex-row justify-between items-center gap-8 pt-12 border-t border-white/5">
               <p className="text-[10px] font-black uppercase tracking-widest text-slate-600">
-                © 2026 Translia Global. All rights reserved.
+                {t.footer.rights}
               </p>
               <div className="flex gap-8 text-[10px] font-black uppercase tracking-widest text-slate-600">
                 <a href="#" className="hover:text-white transition-colors">Privacy</a>
-                <a href="#" className="hover:text-white transition-colors">Terms</a>
                 <a href="#" className="hover:text-white transition-colors">Cookies</a>
               </div>
             </div>
